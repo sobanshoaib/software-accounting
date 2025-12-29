@@ -137,3 +137,23 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+
+# Prisma
+prisma/.env
+prisma/migrations/dev.db
+
+
+# Prisma
+prisma/.env
+prisma/migrations/dev.db
+
+
+backend/dist
+
+
+# OS / Editor
+.DS_Store
+.vscode/
+.idea/
+
