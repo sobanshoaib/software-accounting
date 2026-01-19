@@ -24,5 +24,7 @@ model Employee {
   city    String
   province  String
   postalCode    String
+  paymentFreq   String?
+  amountNum     Int?
   createdAt   DateTime    @default(now())
 }

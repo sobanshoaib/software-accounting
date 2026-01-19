@@ -1,4 +1,4 @@
-import { Post, Controller, Body } from '@nestjs/common';
+import { Post, Get, Controller, Body } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
 import { AddEmployeeDto } from './dto/add-employee.dto';
 
@@ -12,5 +12,10 @@ export class EmployeeController {
         @Body() body: AddEmployeeDto 
     ) {
         return this.service.addEmployee(body)
+    }
+
+    @Get('list-employees')
+    async getAllEmployees() {
+        return this.service.getAllEmployees()
     }
 }

@@ -15,4 +15,8 @@ export class EmployeeService {
         
         return this.prisma.employee.create({data: fixedData});
     }
+
+    async getAllEmployees() {
+        return this.prisma.employee.findMany()
+    }
 }

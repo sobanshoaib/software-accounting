@@ -13,9 +13,12 @@ interface FormData {
   city: string;
   province: string;
   postalCode: string;
+  paymentFreq: string;
+  amountNum: number;
 }
 
 export default function AddEmployee() {
+
 
     const [formData, setFormData] = useState<FormData>({
         lastName: '',
@@ -26,16 +29,31 @@ export default function AddEmployee() {
         city: '',
         province: '',
         postalCode: '',
+        paymentFreq: '',
+        amountNum: 0,
     });
 
 
-    const formEdit = (e) => {
-        const {name, value } = e.target;
+    const payment = [
+        {value: "Biweekly", label: "Biweekly"},
+        {value: "Monthly", label: "Monthly"},
+        {value: "Yearly", label: "Yearly"}
+    ]
 
+    const formEdit = (e) => {
+        const {name, value, type } = e.target;
+
+        if (type === "number") {
+            setFormData(prev => ({
+                ...prev,
+                [name]: +value,
+            }));
+        } else {
         setFormData(prev => ({
                 ...prev,
-                [name]: value
+                [name]: value,
             }));
+        }
 
     }
 
@@ -68,6 +86,7 @@ export default function AddEmployee() {
     }
 
 
+
   return (
     <div className="flex flex-row bg-blue-500 justify-center items-center w-full h-screen">
         <div className="flex flex-col">
@@ -88,6 +107,24 @@ export default function AddEmployee() {
                 <div>
                     <input name="province" value={formData.province} onChange={formEdit} placeholder="Province" />
                     <input name="postalCode" value={formData.postalCode} onChange={formEdit} placeholder="Postal Code" />
+                </div>
+                <div>
+                    <select
+                    name="paymentFreq"
+                    value={formData.paymentFreq}
+                    onChange={formEdit}
+                    >
+                        <option value="" disabled>
+                            Payment Frequency
+                        </option>
+
+                        {payment.map((p) => (
+                            <option key={p.value} value={p.value}>
+                                {p.label}
+                            </option>
+                        ))}
+                    </select>
+                    <input type="number" name="amountNum" value={formData.amountNum} onChange={formEdit} placeholder="Amount" />
                 </div>
                 <div>
                     <button className="p-4 bg-red-500 text-3xl rounded" type="submit">Submit</button>
