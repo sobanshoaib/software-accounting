@@ -15,7 +15,7 @@ datasource db {
 
 
 model Employee {
-  id    Int   @id @default(autoincrement())
+  id  String    @id
   lastName   String
   firstName    String
   dateBirth   DateTime
@@ -27,4 +27,10 @@ model Employee {
   paymentFreq   String?
   amountNum     Int?
   createdAt   DateTime    @default(now())
+}
+
+model PaymentSetting {
+  id  String    @id
+  paymentName   String
+  paymentLastDate   DateTime
 }

@@ -48,6 +48,9 @@ export default function Employees() {
             </div>
           ))}
           </div>
+          <div className="border">
+            <Link href="/employee/payment-settings">Add Payment Settings</Link>
+          </div>
         </div>
 
     </div>
