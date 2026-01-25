@@ -21,4 +21,21 @@ export class PaymentSettingsService {
         const formatted = String(nextnumber).padStart(4, '0');
         return `Payment_Setting_${formatted}`;
     }
+
+    async addPaymentSetting(data: any) {
+
+        const id = await this.getPaymentSettingId();
+        
+        const fixedData = {
+            ...data,
+            id,
+            paymentLastDate: new Date(data.paymentLastDate)
+        }
+        
+        return this.prisma.paymentSetting.create({data: fixedData});
+    }
+
+    async getAllPayments() {
+        return this.prisma.paymentSetting.findMany()
+    }
 }

@@ -5,40 +5,18 @@ import axios from "axios";
 
 
 interface FormData {
-  lastName: string;
-  firstName: string;
-  dateBirth: string;
-  socialInsuranceNumber: string;
-  address: string;
-  city: string;
-  province: string;
-  postalCode: string;
-  paymentFreq: string;
-  amountNum: number;
+  paymentName: string;
+  paymentLastDate: string;
 }
 
-export default function AddEmployee() {
+export default function PaymentSetting() {
 
 
     const [formData, setFormData] = useState<FormData>({
-        lastName: '',
-        firstName: '',
-        dateBirth: '',
-        socialInsuranceNumber: '',
-        address: '',
-        city: '',
-        province: '',
-        postalCode: '',
-        paymentFreq: '',
-        amountNum: 0,
+        paymentName: '',
+        paymentLastDate: '',
     });
 
-
-    const payment = [
-        {value: "Biweekly", label: "Biweekly"},
-        {value: "Monthly", label: "Monthly"},
-        {value: "Yearly", label: "Yearly"}
-    ]
 
     const formEdit = (e) => {
         const {name, value, type } = e.target;
@@ -61,7 +39,7 @@ export default function AddEmployee() {
         e.preventDefault();
 
         try {
-            const url = `http://localhost:3001/employee/add-employee`;
+            const url = `http://localhost:3001/payment-settings/add-payment`;
 
             const urlMethod = 'post';
 
@@ -73,13 +51,13 @@ export default function AddEmployee() {
 
             if (res.status === 200 || res.status === 201) {
                 setFormData(res.data);
-                alert("Employee added successfully");
+                alert("Payment added successfully");
                 
             } else {
-                alert("Error in adding employee")
+                alert("Error in adding payment")
             }
         } catch (e: any) {
-            alert("Error occured while adding employee: " + e.message);
+            alert("Error occured while adding payment: " + e.message);
         }
 
 
@@ -93,38 +71,8 @@ export default function AddEmployee() {
             <p>Payment Settings</p>
             <form onSubmit={formSubmit}>
                 <div>
-                    <input name="lastName" value={formData.lastName} onChange={formEdit} placeholder="Last Name" />
-                    <input name="firstName" value={formData.firstName} onChange={formEdit} placeholder="First Name" />
-                </div>
-                <div>
-                    <input type="date" name="dateBirth" value={formData.dateBirth} onChange={formEdit} placeholder="Date of Birth" />
-                    <input name="socialInsuranceNumber" value={formData.socialInsuranceNumber} onChange={formEdit} placeholder="Social Insurance Number" />
-                </div>
-                <div>
-                    <input name="address" value={formData.address} onChange={formEdit}placeholder="Address" />
-                    <input name="city" value={formData.city} onChange={formEdit} placeholder="City" />
-                </div>
-                <div>
-                    <input name="province" value={formData.province} onChange={formEdit} placeholder="Province" />
-                    <input name="postalCode" value={formData.postalCode} onChange={formEdit} placeholder="Postal Code" />
-                </div>
-                <div>
-                    <select
-                    name="paymentFreq"
-                    value={formData.paymentFreq}
-                    onChange={formEdit}
-                    >
-                        <option value="" disabled>
-                            Payment Frequency
-                        </option>
-
-                        {payment.map((p) => (
-                            <option key={p.value} value={p.value}>
-                                {p.label}
-                            </option>
-                        ))}
-                    </select>
-                    <input type="number" name="amountNum" value={formData.amountNum} onChange={formEdit} placeholder="Amount" />
+                    <input type="text" name="paymentName" value={formData.paymentName} onChange={formEdit} placeholder="Title" />
+                    <input type="date" name="paymentLastDate" value={formData.paymentLastDate} onChange={formEdit} placeholder="00000000" />
                 </div>
                 <div>
                     <button className="p-4 bg-red-500 text-3xl rounded" type="submit">Submit</button>

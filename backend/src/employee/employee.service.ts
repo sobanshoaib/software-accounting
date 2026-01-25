@@ -23,9 +23,11 @@ export class EmployeeService {
     }
 
     async addEmployee(data: any) {
+        const id = this.getEmployeeId();
         
         const fixedData = {
             ...data,
+            id,
             dateBirth: new Date(data.dateBirth)
         }
         
