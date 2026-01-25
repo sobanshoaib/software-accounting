@@ -16,5 +16,9 @@ export class PaymentSettingsService {
                 maxNum = numPart;
             }
         }
+
+        const nextnumber = maxNum + 1;
+        const formatted = String(nextnumber).padStart(4, '0');
+        return `Payment_Setting_${formatted}`;
     }
 }
