@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 
@@ -17,7 +17,14 @@ interface FormData {
   amountNum: number;
 }
 
+interface PaymentSetting {
+    id: string;
+    paymentName: string;
+}
+
 export default function AddEmployee() {
+
+    const [payments, setPayments] = useState<PaymentSetting[]>([]);
 
 
     const [formData, setFormData] = useState<FormData>({
@@ -34,15 +41,29 @@ export default function AddEmployee() {
     });
 
 
-    const payment = [
-        {value: "Biweekly", label: "Biweekly"},
-        {value: "Monthly", label: "Monthly"},
-        {value: "Yearly", label: "Yearly"}
-    ]
+
+    useEffect(() => {
+        const fetchPayments = async () => {
+            const r = await axios.get("http://localhost:3001/payment-settings/list-payments");
+            setPayments(r.data);
+        }
+        fetchPayments();
+    }, []);
+
+    const paymentOptions = payments.map((payment) => ({
+        value: payment.id.toString(),
+        label: payment.paymentName,
+    }))
 
     const formEdit = (e) => {
         const {name, value, type } = e.target;
 
+        console.log("name: ", name);
+        console.log("value: ", value);
+        // if (name == 'paymentFreq') {
+        //     setSelectedPayment(value);
+        // }
+        
         if (type === "number") {
             setFormData(prev => ({
                 ...prev,
@@ -118,7 +139,7 @@ export default function AddEmployee() {
                             Payment Frequency
                         </option>
 
-                        {payment.map((p) => (
+                        {paymentOptions.map((p) => (
                             <option key={p.value} value={p.value}>
                                 {p.label}
                             </option>

@@ -10,8 +10,8 @@ export class EmployeeService {
         const employees = await this.prisma.employee.findMany();
         let maxNum = 0;
         for (const employee of employees) {
-            const idParts = employee.id.split("-");
-            const numPart = parseInt(idParts[2]);
+            const idParts = employee.id.split("_");
+            const numPart = parseInt(idParts[1]);
             if (!isNaN(numPart) && numPart > maxNum) {
                 maxNum = numPart;
             }
@@ -23,7 +23,7 @@ export class EmployeeService {
     }
 
     async addEmployee(data: any) {
-        const id = this.getEmployeeId();
+        const id = await this.getEmployeeId();
         
         const fixedData = {
             ...data,

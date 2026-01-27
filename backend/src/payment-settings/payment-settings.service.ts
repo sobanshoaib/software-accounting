@@ -10,7 +10,7 @@ export class PaymentSettingsService {
         const paymentSettings = await this.prisma.paymentSetting.findMany();
         let maxNum = 0;
         for (const payment of paymentSettings) {
-            const idParts = payment.id.split("-");
+            const idParts = payment.id.split("_");
             const numPart = parseInt(idParts[2]);
             if (!isNaN(numPart) && numPart > maxNum) {
                 maxNum = numPart;
