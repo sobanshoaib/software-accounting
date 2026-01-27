@@ -27,10 +27,14 @@ model Employee {
   paymentFreq   String?
   amountNum     Int?
   createdAt   DateTime    @default(now())
+
+  paymentSettingRelation    PaymentSetting? @relation(fields: [paymentFreq], references: [id])
 }
 
 model PaymentSetting {
   id  String    @id
   paymentName   String
   paymentLastDate   DateTime
+
+  employees Employee[]
 }

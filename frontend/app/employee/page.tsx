@@ -31,7 +31,7 @@ export default function Employees() {
       console.log(res.data);
     }
     fetchEmployees()
-  }, [])
+  }, []);
 
   return (
     <div className="flex flex-row bg-blue-500 justify-center items-center w-full h-screen">

@@ -1,12 +1,18 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 
 interface FormData {
   paymentName: string;
   paymentLastDate: string;
+}
+
+interface PaymentSetting {
+    id: string;
+    paymentName: string;
+    paymentLastDate: string;
 }
 
 export default function PaymentSetting() {
@@ -17,8 +23,20 @@ export default function PaymentSetting() {
         paymentLastDate: '',
     });
 
+    const [allPayments, setAllPayments] = useState<PaymentSetting[]>([]);
 
-    const formEdit = (e) => {
+    useEffect(() => {
+        const fetchPayments = async () => {
+        const res = await axios.get("http://localhost:3001/payment-settings/list-payments");
+        setAllPayments(res.data)
+        // console.log(res)
+        console.log(res.data);
+        }
+        fetchPayments()
+    }, []);
+
+
+    const formEdit = (e:any) => {
         const {name, value, type } = e.target;
 
         if (type === "number") {
@@ -35,7 +53,7 @@ export default function PaymentSetting() {
 
     }
 
-    const formSubmit = async (e) => {
+    const formSubmit = async (e: any) => {
         e.preventDefault();
 
         try {
@@ -66,7 +84,7 @@ export default function PaymentSetting() {
 
 
   return (
-    <div className="flex flex-row bg-blue-500 justify-center items-center w-full h-screen">
+    <div className="flex flex-col bg-blue-500 justify-center items-center w-full h-screen">
         <div className="flex flex-col">
             <p>Payment Settings</p>
             <form onSubmit={formSubmit}>
@@ -78,6 +96,15 @@ export default function PaymentSetting() {
                     <button className="p-4 bg-red-500 text-3xl rounded" type="submit">Submit</button>
                 </div>
             </form>
+        </div>
+        <div>Upcoming Payments Due</div>
+        <div>
+            {allPayments.map((payment, index) => (
+                <div className="flex flex-col">
+                    <p>{payment.paymentName}</p>
+                    <p>{payment.paymentLastDate}</p>
+                </div>
+            ))}
         </div>
         
     </div>

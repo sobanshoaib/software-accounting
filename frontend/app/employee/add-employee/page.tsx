@@ -55,14 +55,12 @@ export default function AddEmployee() {
         label: payment.paymentName,
     }))
 
-    const formEdit = (e) => {
+    const formEdit = (e: any) => {
         const {name, value, type } = e.target;
 
         console.log("name: ", name);
         console.log("value: ", value);
-        // if (name == 'paymentFreq') {
-        //     setSelectedPayment(value);
-        // }
+
         
         if (type === "number") {
             setFormData(prev => ({
@@ -78,7 +76,7 @@ export default function AddEmployee() {
 
     }
 
-    const formSubmit = async (e) => {
+    const formSubmit = async (e: any) => {
         e.preventDefault();
 
         try {
