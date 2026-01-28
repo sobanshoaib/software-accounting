@@ -35,6 +35,7 @@ model PaymentSetting {
   id  String    @id
   paymentName   String
   paymentLastDate   DateTime
+  createdAt     DateTime    @default(now())
 
   employees Employee[]
 }

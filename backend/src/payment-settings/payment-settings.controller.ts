@@ -19,4 +19,9 @@ export class PaymentSettingsController {
         return this.service.getAllPayments()
     }
 
+    @Get('timed-payments')
+    async getTimedPayments() {
+        return this.service.getTimedPayments();
+    }
+
 }

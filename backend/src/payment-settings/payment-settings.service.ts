@@ -38,4 +38,31 @@ export class PaymentSettingsService {
     async getAllPayments() {
         return this.prisma.paymentSetting.findMany()
     }
+
+    async getTimedPayments() {
+
+        const now = new Date();
+        
+        const startOfToday = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate()
+        );
+
+        const startOfTomorrow = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate() + 1
+        );
+
+        return this.prisma.paymentSetting.findMany({
+            where: {
+                paymentLastDate: {
+                    gte: startOfToday,
+                    lte: startOfTomorrow,
+                },
+            },
+        });
+
+    }
 }

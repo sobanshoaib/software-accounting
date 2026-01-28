@@ -27,7 +27,7 @@ export default function PaymentSetting() {
 
     useEffect(() => {
         const fetchPayments = async () => {
-        const res = await axios.get("http://localhost:3001/payment-settings/list-payments");
+        const res = await axios.get("http://localhost:3001/payment-settings/timed-payments");
         setAllPayments(res.data)
         // console.log(res)
         console.log(res.data);
