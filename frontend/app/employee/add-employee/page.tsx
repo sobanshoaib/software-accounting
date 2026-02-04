@@ -15,6 +15,7 @@ interface FormData {
   postalCode: string;
   paymentFreq: string;
   amountNum: number;
+  hiringDate: string;
 }
 
 interface PaymentSetting {
@@ -38,6 +39,7 @@ export default function AddEmployee() {
         postalCode: '',
         paymentFreq: '',
         amountNum: 0,
+        hiringDate: '',
     });
 
 
@@ -109,23 +111,23 @@ export default function AddEmployee() {
   return (
     <div className="flex flex-row bg-blue-500 justify-center items-center w-full h-screen">
         <div className="flex flex-col">
-            <p>Add Employee Form</p>
+            <p className="font-bold">Add Employee Form</p>
             <form onSubmit={formSubmit}>
                 <div>
-                    <input name="lastName" value={formData.lastName} onChange={formEdit} placeholder="Last Name" />
-                    <input name="firstName" value={formData.firstName} onChange={formEdit} placeholder="First Name" />
+                    <input className="border" name="lastName" value={formData.lastName} onChange={formEdit} placeholder="Last Name" />
+                    <input className="border" name="firstName" value={formData.firstName} onChange={formEdit} placeholder="First Name" />
                 </div>
                 <div>
-                    <input type="date" name="dateBirth" value={formData.dateBirth} onChange={formEdit} placeholder="Date of Birth" />
-                    <input name="socialInsuranceNumber" value={formData.socialInsuranceNumber} onChange={formEdit} placeholder="Social Insurance Number" />
+                    <input className="border" type="date" name="dateBirth" value={formData.dateBirth} onChange={formEdit} placeholder="Date of Birth" />
+                    <input className="border ml-20" name="socialInsuranceNumber" value={formData.socialInsuranceNumber} onChange={formEdit} placeholder="Social Insurance Number" />
                 </div>
                 <div>
-                    <input name="address" value={formData.address} onChange={formEdit}placeholder="Address" />
-                    <input name="city" value={formData.city} onChange={formEdit} placeholder="City" />
+                    <input className="border" name="address" value={formData.address} onChange={formEdit}placeholder="Address" />
+                    <input className="border" name="city" value={formData.city} onChange={formEdit} placeholder="City" />
                 </div>
                 <div>
-                    <input name="province" value={formData.province} onChange={formEdit} placeholder="Province" />
-                    <input name="postalCode" value={formData.postalCode} onChange={formEdit} placeholder="Postal Code" />
+                    <input className="border" name="province" value={formData.province} onChange={formEdit} placeholder="Province" />
+                    <input className="border" name="postalCode" value={formData.postalCode} onChange={formEdit} placeholder="Postal Code" />
                 </div>
                 <div>
                     <select
@@ -143,7 +145,10 @@ export default function AddEmployee() {
                             </option>
                         ))}
                     </select>
-                    <input type="number" name="amountNum" value={formData.amountNum} onChange={formEdit} placeholder="Amount" />
+                    <input className="border" type="number" name="amountNum" value={formData.amountNum} onChange={formEdit} />
+                </div>
+                <div>
+                    <input className="border" type="date"  name="hiringDate" value={formData.hiringDate} onChange={formEdit} placeholder="Hiring Date" />
                 </div>
                 <div>
                     <button className="p-4 bg-red-500 text-3xl rounded" type="submit">Submit</button>
