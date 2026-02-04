@@ -7,4 +7,5 @@ export class AddEmployeeDto {
     city: string;
     province: string;
     postalCode: string;
+    hiringDate: string;
 }

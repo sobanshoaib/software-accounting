@@ -15,6 +15,7 @@ interface Employees {
   city: string;
   province: string;
   postalCode: string;
+  hiringDate: string;
 }
 
 

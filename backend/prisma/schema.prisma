@@ -26,6 +26,7 @@ model Employee {
   postalCode    String
   paymentFreq   String?
   amountNum     Int?
+  hiringDate    DateTime
   createdAt   DateTime    @default(now())
 
   paymentSettingRelation    PaymentSetting? @relation(fields: [paymentFreq], references: [id])

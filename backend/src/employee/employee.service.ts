@@ -28,7 +28,8 @@ export class EmployeeService {
         const fixedData = {
             ...data,
             id,
-            dateBirth: new Date(data.dateBirth)
+            dateBirth: new Date(data.dateBirth),
+            hiringDate: new Date(data.hiringDate)
         }
         
         return this.prisma.employee.create({data: fixedData});
